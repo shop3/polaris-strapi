@@ -16,6 +16,8 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@strapify'
       - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READ_PRIVATE_PACKAGES }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
