@@ -1,6 +1,6 @@
 {
   "name": "@strapify/polaris-strapi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Polaris strapi components",
   "license": "MIT",
   "main": "lib/index.js",
