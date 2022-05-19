@@ -15,11 +15,17 @@ async function uploadFiles(input: File | File[]): Promise<DbFile | DbFile[]> {
     method: 'post',
     body: formData,
   });
-  if (response.status !== 200) {
-    throw new Error('failed to upload files');
+  if (response.status >= 400) {
+    const result = await response.json().catch(() => undefined);
+    throw new Error(`Failed to upload files: ${result ? JSON.stringify(result.error, null, 2) : 'unknown error'}`);
   }
   const result = await response.json();
-  return result;
+  if (input instanceof File) {
+    return result[0];
+  } else if (isFileArray(input)) {
+    return result;
+  }
+  throw new Error('Something went wrong with files upload');
 }
 
 export default uploadFiles;
