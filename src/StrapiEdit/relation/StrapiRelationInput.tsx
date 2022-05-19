@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { Combobox, Heading, Listbox, Stack, Tag, TextStyle } from '@shopify/polaris';
-import useSWR from 'swr';
 import qs from 'qs';
 import _ from 'lodash';
 import context from '../context';
+import { useResource } from '../../hooks';
 
 type Option = {
   label: string;
@@ -30,7 +30,7 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
     data: response,
     error,
     isValidating,
-  } = useSWR(
+  } = useResource(
     `${relation.resourceUrl}?${qs.stringify({
       _q: searchQuery,
       populate: relation.field,

@@ -1,6 +1,6 @@
 import React from 'react';
-import useSWR from 'swr';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 
 type Props = {
   resourceUrl: string;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const StrapiShowImage: React.FC<Props> = ({ resourceUrl, field, size }) => {
-  const { data: response } = useSWR(resourceUrl);
+  const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

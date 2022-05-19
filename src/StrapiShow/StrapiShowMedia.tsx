@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack } from '@shopify/polaris';
 import { Media, SkeletonMedia } from '@strapify/polaris-common';
-import useSWR from 'swr';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 
 type Props = {
   resourceUrl: string;
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, field, multiple }) => {
-  const { data: response } = useSWR(resourceUrl);
+  const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, `data.attributes.${field}.data.attributes`, {});

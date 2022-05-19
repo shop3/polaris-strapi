@@ -1,7 +1,7 @@
 import React from 'react';
 import { SkeletonBodyText } from '@shopify/polaris';
-import useSWR from 'swr';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 
 type Props = {
   resourceUrl: string;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const StrapiShowText: React.FC<Props> = ({ resourceUrl, field }) => {
-  const { data: response } = useSWR(resourceUrl);
+  const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

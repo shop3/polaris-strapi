@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Page, PageProps, SkeletonPage } from '@shopify/polaris';
-import useSWR from 'swr';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 
 type Props = Omit<PageProps, 'title' | 'subtitle' | 'titleMetadata'> & {
   resourceUrl: string;
@@ -11,7 +11,7 @@ type Props = Omit<PageProps, 'title' | 'subtitle' | 'titleMetadata'> & {
 };
 
 const StrapiShowPage: React.FC<Props> = ({ resourceUrl, children, ...props }) => {
-  const { data: response } = useSWR(resourceUrl);
+  const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

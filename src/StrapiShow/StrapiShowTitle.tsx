@@ -1,7 +1,7 @@
 import React from 'react';
 import { DisplayText, DisplayTextProps, SkeletonDisplayText } from '@shopify/polaris';
-import useSWR from 'swr';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 
 type Props = Omit<DisplayTextProps, 'children'> & {
   resourceUrl: string;
@@ -9,7 +9,7 @@ type Props = Omit<DisplayTextProps, 'children'> & {
 };
 
 const StrapiShowTitle: React.FC<Props> = ({ resourceUrl, field, element, size }) => {
-  const { data: response } = useSWR(resourceUrl);
+  const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

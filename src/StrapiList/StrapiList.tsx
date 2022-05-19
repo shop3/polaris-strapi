@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Card, ResourceList } from '@shopify/polaris';
-import useSWR from 'swr';
 import qs from 'qs';
 import _ from 'lodash';
+import { useResource } from '../hooks';
 import { ListFilter, FilterContext } from './filter';
 import { ListPagination, PaginationContext, StrapiListPagination } from './pagination';
 import { ItemContext } from './items';
@@ -63,7 +63,7 @@ const StrapiList: React.FC<Props> = ({ resourceUrl, children, sorting, initialPa
     data: response,
     error,
     isValidating,
-  } = useSWR(
+  } = useResource(
     `${resourceUrl}?${qs.stringify(
       _.merge(query ? { _q: query } : {}, {
         filters,
