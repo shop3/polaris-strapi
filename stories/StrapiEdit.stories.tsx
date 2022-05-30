@@ -1,5 +1,6 @@
 import React from 'react';
 import { rest } from 'msw';
+import qs from 'qs';
 import { Card, FormLayout, Layout, Page } from '@shopify/polaris';
 import _ from 'lodash';
 
@@ -18,7 +19,7 @@ export default {
   component: null,
 };
 
-const Template = () => (
+const Template = ({ initialValue }: any) => (
   <Page
     title="Form"
     primaryAction={
@@ -27,7 +28,7 @@ const Template = () => (
       </StrapiSubmit>
     }
   >
-    <StrapiEdit formId="strapi-edit-form" resourceUrl="/api/test" method="POST">
+    <StrapiEdit formId="strapi-edit-form" resourceUrl="/api/test" method="POST" initialValue={initialValue}>
       <Layout>
         <Layout.Section>
           <Card sectioned>
@@ -92,6 +93,89 @@ Example.parameters = {
 
       rest.post('/api/test', (req, res, ctx) => {
         return res(ctx.delay(800), ctx.json({}));
+      }),
+
+      rest.get('/api/categories', (req, res, ctx) => {
+        return res(
+          ctx.delay(800),
+          ctx.json({
+            data: [
+              { id: 1, attributes: { name: 'Clothes' } },
+              { id: 2, attributes: { name: 'Pants' } },
+              { id: 3, attributes: { name: 'Shirts' } },
+            ],
+          })
+        );
+      }),
+
+      rest.get('/api/tags', (req, res, ctx) => {
+        return res(
+          ctx.delay(800),
+          ctx.json({
+            data: [
+              { id: 1, attributes: { value: 'Rock' } },
+              { id: 2, attributes: { value: 'Punk' } },
+              { id: 3, attributes: { value: 'Pop' } },
+            ],
+          })
+        );
+      }),
+    ],
+  },
+};
+
+export const InitialValue: any = Template.bind({});
+
+InitialValue.args = {
+  initialValue: {
+    title: 'Test Title',
+    description: 'Test description',
+    quantity: 10,
+    color: 'GREEN',
+    images: [1, 2],
+  },
+};
+
+InitialValue.parameters = {
+  msw: {
+    handlers: [
+      rest.post('/api/upload', (req, res, ctx) => {
+        const response = [];
+        const files = _.get(req, 'body.files');
+        if (Array.isArray(files)) {
+          files.forEach((f, i) => {
+            response.push({
+              id: i + 1,
+            });
+          });
+        } else {
+          response.push({
+            id: 1,
+          });
+        }
+        return res(ctx.delay(3000), ctx.json(response));
+      }),
+
+      rest.post('/api/test', (req, res, ctx) => {
+        return res(ctx.delay(800), ctx.json({}));
+      }),
+
+      rest.get('/api/upload/files', (req, res, ctx) => {
+        const params = qs.parse(req.url.searchParams.toString());
+        const { filters }: any = params;
+        if (!filters || !filters.id || !filters.id.$in) return res(ctx.json([]));
+        return res(
+          ctx.delay(800),
+          ctx.json({
+            results: filters.id.$in.map((id: number | string) => ({
+              id,
+              url: '/assets/placeholder.png',
+              name: 'placeholder.png',
+              mime: 'image/png',
+              size: 67.5,
+            })),
+          })
+        );
       }),
 
       rest.get('/api/categories', (req, res, ctx) => {
