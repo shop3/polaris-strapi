@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/strapify/polaris-strapi/compare/v0.0.2...v0.0.3) (2022-05-31)
+
+
+### Features
+
+* **edit:** added getFiles method ([5e8679a](https://github.com/strapify/polaris-strapi/commit/5e8679a4516ac815ede9a603131c1cf207c5cd14))
+* **edit:** added media input initial value ([201fc5e](https://github.com/strapify/polaris-strapi/commit/201fc5ecc60843862d8e1a2ca57ce8d3e1f1e777))
+* **edit:** added media type guards ([f1afa4e](https://github.com/strapify/polaris-strapi/commit/f1afa4ed2a33279786efaa43bb548d40d7a11f4b))
+* **edit:** changed upload and remove logic ([afb4f92](https://github.com/strapify/polaris-strapi/commit/afb4f9205185f7536d413f19ddcd1355baad22bc))
+
+
+### Bug Fixes
+
+* **edit:** set media size type to number ([9462f29](https://github.com/strapify/polaris-strapi/commit/9462f292bf27855347fdaf6109f2a3dec3d9b52e))
+
 ### [0.0.2](https://github.com/strapify/polaris-strapi/compare/v0.0.1...v0.0.2) (2022-05-19)
 
 
