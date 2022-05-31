@@ -1,9 +1,11 @@
-import React, { SyntheticEvent, useCallback, useContext, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { Button, DropZone, Heading, Spinner, Stack, TextStyle } from '@shopify/polaris';
 import { Media, MediaProps } from '@strapify/polaris-common';
 import _ from 'lodash';
 import Context from '../context';
+import fetchFiles from './fetchFiles';
 import uploadFiles from './uploadFiles';
+import { isFileDb, isFileDbArray, isId, isIdArray } from './types';
 
 type Props = {
   label: string;
@@ -22,13 +24,73 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
   const [files, setFiles] = useState<FilesState>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  // handle initial value
+  useEffect(() => {
+    if (form[attribute.field]) {
+      if (!attribute.multiple) {
+        const file = form[attribute.field];
+        if (isId(file)) {
+          setLoading(true);
+          fetchFiles(file).then((fileDb) => {
+            setFiles([
+              {
+                id: fileDb.id,
+                url: fileDb.url,
+                name: fileDb.name,
+                size: fileDb.size.toFixed(1),
+                mime: fileDb.mime,
+              },
+            ]);
+            setLoading(false);
+          });
+        } else if (isFileDb(file)) {
+          setFiles([
+            {
+              id: file.id,
+              url: file.url,
+              name: file.name,
+              size: file.size.toFixed(1),
+              mime: file.mime,
+            },
+          ]);
+        }
+      } else {
+        const files = form[attribute.field];
+        if (isIdArray(files)) {
+          setLoading(true);
+          fetchFiles(files).then((filesDb) => {
+            setFiles(
+              filesDb.map((fileDb) => ({
+                id: fileDb.id,
+                url: fileDb.url,
+                name: fileDb.name,
+                size: fileDb.size.toFixed(1),
+                mime: fileDb.mime,
+              }))
+            );
+            setLoading(false);
+          });
+        } else if (isFileDbArray(files)) {
+          setFiles(
+            files.map((file) => ({
+              id: file.id,
+              url: file.url,
+              name: file.name,
+              size: file.size.toFixed(1),
+              mime: file.mime,
+            }))
+          );
+        }
+      }
+    }
+  }, []);
+
   const handleDropZoneDrop = useCallback(
     (_dropFiles, acceptedFiles, _rejectedFiles) => {
       if (!attribute.multiple) {
         // single file
         const fileToUpload: File = acceptedFiles[0];
         setLoading(true);
-        // setForm({ ...form, [attribute.field]: file });
         uploadFiles(fileToUpload).then((fileDb) => {
           const newFile = {
             id: fileDb.id,
@@ -45,7 +107,6 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         // multiple files
         const filesToUpload: File[] = acceptedFiles;
         setLoading(true);
-        // setForm({ ...form, [attribute.field]: files });
         uploadFiles(filesToUpload).then((filesDb) => {
           const newFiles = filesDb.map((fileDb) => ({
             id: fileDb.id,
