@@ -1,9 +1,9 @@
 import qs from 'qs';
 import { DbFile } from './types';
 
-async function getFiles(id: number | string): Promise<DbFile>;
-async function getFiles(ids: number[] | string[]): Promise<DbFile[]>;
-async function getFiles(input: number | string | number[] | string[]): Promise<DbFile | DbFile[]> {
+async function fetchFiles(id: number | string): Promise<DbFile>;
+async function fetchFiles(ids: number[] | string[]): Promise<DbFile[]>;
+async function fetchFiles(input: number | string | number[] | string[]): Promise<DbFile | DbFile[]> {
   const response = await fetch(
     `/api/upload/files?${qs.stringify({
       filters: { id: { $in: Array.isArray(input) ? input : [input] } },
@@ -21,4 +21,4 @@ async function getFiles(input: number | string | number[] | string[]): Promise<D
   }
 }
 
-export default getFiles;
+export default fetchFiles;
