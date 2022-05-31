@@ -37,7 +37,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
                 id: fileDb.id,
                 url: fileDb.url,
                 name: fileDb.name,
-                size: fileDb.size.toFixed(1),
+                size: fileDb.size,
                 mime: fileDb.mime,
               },
             ]);
@@ -49,7 +49,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
               id: file.id,
               url: file.url,
               name: file.name,
-              size: file.size.toFixed(1),
+              size: file.size,
               mime: file.mime,
             },
           ]);
@@ -64,7 +64,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
                 id: fileDb.id,
                 url: fileDb.url,
                 name: fileDb.name,
-                size: fileDb.size.toFixed(1),
+                size: fileDb.size,
                 mime: fileDb.mime,
               }))
             );
@@ -76,7 +76,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
               id: file.id,
               url: file.url,
               name: file.name,
-              size: file.size.toFixed(1),
+              size: file.size,
               mime: file.mime,
             }))
           );
@@ -96,7 +96,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
             id: fileDb.id,
             url: fileDb.url,
             name: fileDb.name,
-            size: fileDb.size.toFixed(1),
+            size: fileDb.size,
             mime: fileDb.mime,
           };
           setFiles([newFile]);
@@ -112,7 +112,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
             id: fileDb.id,
             url: fileDb.url,
             name: fileDb.name,
-            size: fileDb.size.toFixed(1),
+            size: fileDb.size,
             mime: fileDb.mime,
           }));
           setFiles(uniqueUnion(files, newFiles) || []);
