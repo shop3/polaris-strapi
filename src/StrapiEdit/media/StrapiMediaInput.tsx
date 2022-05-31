@@ -1,8 +1,8 @@
-import React, { SyntheticEvent, useCallback, useContext } from 'react';
-import { Button, DropZone, Heading, Stack, TextStyle } from '@shopify/polaris';
+import React, { SyntheticEvent, useCallback, useContext, useState } from 'react';
+import { Button, DropZone, Heading, Spinner, Stack, TextStyle } from '@shopify/polaris';
 import { Media, MediaProps } from '@strapify/polaris-common';
+import _ from 'lodash';
 import Context from '../context';
-import { useRefreshable } from '../../hooks';
 import uploadFiles from './uploadFiles';
 
 type Props = {
@@ -15,53 +15,55 @@ type Props = {
   multiple: boolean;
 };
 
+type FilesState = Array<MediaProps & { id: number }>;
+
 const StrapiMediaInput: React.FC<Props> = (attribute) => {
   const { form, setForm } = useContext(Context);
-  const [files, refresh] = useRefreshable<MediaProps[]>(() => {
-    if (form[attribute.field]) {
-      if (!attribute.multiple) {
-        // single file
-        const file = form[attribute.field];
-        return [
-          {
-            url: window.URL.createObjectURL(file),
-            name: file.name,
-            size: (file.size / 1024).toFixed(1),
-            mime: file.type,
-          },
-        ];
-      } else {
-        // multiple files
-        return form[attribute.field].map((file: File) => ({
-          url: window.URL.createObjectURL(file),
-          name: file.name,
-          size: (file.size / 1024).toFixed(1),
-          mime: file.type,
-        }));
-      }
-    }
-  });
+  const [files, setFiles] = useState<FilesState>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleDropZoneDrop = useCallback(
     (_dropFiles, acceptedFiles, _rejectedFiles) => {
       if (!attribute.multiple) {
         // single file
-        const file: File = acceptedFiles[0];
-        setForm({ ...form, [attribute.field]: file });
-        uploadFiles(file).then((fileDb) => {
-          setForm({ ...form, [attribute.field]: fileDb.id });
+        const fileToUpload: File = acceptedFiles[0];
+        setLoading(true);
+        // setForm({ ...form, [attribute.field]: file });
+        uploadFiles(fileToUpload).then((fileDb) => {
+          const newFile = {
+            id: fileDb.id,
+            url: fileDb.url,
+            name: fileDb.name,
+            size: fileDb.size.toFixed(1),
+            mime: fileDb.mime,
+          };
+          setFiles([newFile]);
+          setForm({ ...form, [attribute.field]: newFile.id });
+          setLoading(false);
         });
       } else {
         // multiple files
-        const files: File[] = acceptedFiles;
-        setForm({ ...form, [attribute.field]: files });
-        uploadFiles(files).then((filesDb) => {
-          setForm({ ...form, [attribute.field]: filesDb.map((x) => x.id) });
+        const filesToUpload: File[] = acceptedFiles;
+        setLoading(true);
+        // setForm({ ...form, [attribute.field]: files });
+        uploadFiles(filesToUpload).then((filesDb) => {
+          const newFiles = filesDb.map((fileDb) => ({
+            id: fileDb.id,
+            url: fileDb.url,
+            name: fileDb.name,
+            size: fileDb.size.toFixed(1),
+            mime: fileDb.mime,
+          }));
+          setFiles(uniqueUnion(files, newFiles) || []);
+          setForm({
+            ...form,
+            [attribute.field]: uniqueUnion(_.get(form, attribute.field), _.map(newFiles, 'id')),
+          });
+          setLoading(false);
         });
       }
-      refresh();
     },
-    [form, setForm]
+    [attribute, form, setForm, files, setFiles, setLoading]
   );
 
   const handleOnRemove: any = (field: string, index: number) => {
@@ -69,14 +71,13 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
       e.stopPropagation();
       if (!attribute.multiple) {
         // single file
+        setFiles([]);
         setForm({ ...form, [field]: undefined });
       } else {
         // multiple files
-        let files = form[field].filter((x: File, i: number) => i !== index);
-        if (files.length === 0) files = undefined;
-        setForm({ ...form, [field]: files });
+        setFiles(removeAtIndex(files, index) || []);
+        setForm({ ...form, [field]: removeAtIndex(form[field], index) });
       }
-      refresh();
     };
   };
 
@@ -90,8 +91,28 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         onDrop={handleDropZoneDrop}
         variableHeight
       >
-        {!form[attribute.field] && <DropZone.FileUpload actionHint={attribute.placeholder} />}
-        {form[attribute.field] && files && (
+        {files && files.length === 0 && <DropZone.FileUpload actionHint={attribute.placeholder} />}
+        {loading && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: 'rgba(255, 255, 255, 0.5)',
+              zIndex: 100,
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <Spinner size="large" />
+          </div>
+        )}
+        {files && files.length > 0 && (
           <div style={{ padding: '1.5rem' }}>
             <Stack vertical>
               {files.map((file, index) => (
@@ -116,3 +137,16 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
 };
 
 export default StrapiMediaInput;
+
+function removeAtIndex<T>(array: T[] | undefined, index: number): T[] | undefined {
+  if (!array || !Array.isArray(array)) return undefined;
+  const result = array.filter((x, i) => i !== index);
+  if (result.length === 0) return undefined;
+  return result;
+}
+
+function uniqueUnion<T>(...arrays: Array<T[] | undefined>): T[] | undefined {
+  const result = _.uniqWith(_.union(...arrays), _.isEqual);
+  if (result.length === 0) return undefined;
+  return result;
+}

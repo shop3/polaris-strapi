@@ -74,18 +74,27 @@ export const Example: any = Template.bind({});
 Example.parameters = {
   msw: {
     handlers: [
-      rest.post('/api/upload', (req, res, ctx) => {
+      rest.post('/api/upload', async (req, res, ctx) => {
         const response = [];
-        const files = _.get(req, 'body.files');
+        const files: File[] | File = _.get(req, 'body.files');
         if (Array.isArray(files)) {
-          files.forEach((f, i) => {
+          for (const f of files) {
             response.push({
-              id: i + 1,
+              id: randomId(),
+              name: f.name,
+              mime: f.type,
+              size: f.size / 1000,
+              url: '/assets/placeholder.png',
             });
-          });
+          }
         } else {
+          const f = files;
           response.push({
-            id: 1,
+            id: randomId(),
+            name: f.name,
+            mime: f.type,
+            size: f.size / 1000,
+            url: '/assets/placeholder.png',
           });
         }
         return res(ctx.delay(3000), ctx.json(response));
@@ -141,16 +150,25 @@ InitialValue.parameters = {
     handlers: [
       rest.post('/api/upload', (req, res, ctx) => {
         const response = [];
-        const files = _.get(req, 'body.files');
+        const files: File[] | File = _.get(req, 'body.files');
         if (Array.isArray(files)) {
-          files.forEach((f, i) => {
+          for (const f of files) {
             response.push({
-              id: i + 1,
+              id: randomId(),
+              name: f.name,
+              mime: f.type,
+              size: f.size / 1000,
+              url: '/assets/placeholder.png',
             });
-          });
+          }
         } else {
+          const f = files;
           response.push({
-            id: 1,
+            id: randomId(),
+            name: f.name,
+            mime: f.type,
+            size: f.size / 1000,
+            url: '/assets/placeholder.png',
           });
         }
         return res(ctx.delay(3000), ctx.json(response));
@@ -206,3 +224,7 @@ InitialValue.parameters = {
     ],
   },
 };
+
+function randomId() {
+  return Math.floor(Math.random() * 1000000) + 1;
+}
