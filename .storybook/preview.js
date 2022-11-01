@@ -6,7 +6,7 @@ import { I18nContext, I18nManager, useI18n } from '@shopify/react-i18n';
 import translations from '@shopify/polaris/locales/en.json';
 
 import '@shopify/polaris/build/esm/styles.css';
-import '@strapify/polaris-markdown/styles/markdown.css';
+import '@shop3/polaris-markdown/styles/markdown.css';
 
 import { getTheme } from './themes';
 
