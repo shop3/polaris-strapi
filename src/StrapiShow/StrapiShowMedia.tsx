@@ -14,7 +14,7 @@ const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, field, multiple }) => {
   const { data: response } = useResource(resourceUrl);
 
   const isLoading = typeof response === 'undefined';
-  const data = _.get(response, `data.attributes.${field}.data.attributes`, {});
+  const data: any = _.get(response, `data.attributes.${field}.data.attributes`, {});
 
   if (isLoading) {
     return <Stack vertical>{multiple ? _.times(3).map((i) => <SkeletonMedia key={i} />) : <SkeletonMedia />}</Stack>;

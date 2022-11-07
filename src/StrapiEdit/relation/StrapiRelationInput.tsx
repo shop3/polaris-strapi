@@ -39,7 +39,7 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
 
   const isLoading = typeof response === 'undefined' || isValidating;
   const options: Option[] = useMemo(() => {
-    return _.map(_.get(response, 'data', []), (x) => ({
+    return _.map(_.get(response, 'data', []), (x: any) => ({
       value: String(x.id),
       label: _.get(x, `attributes.${relation.displayField}`),
     }));

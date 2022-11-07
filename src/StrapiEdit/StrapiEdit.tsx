@@ -12,6 +12,7 @@ type Props = {
   initialValue?: Form;
   beforeSubmit?: (form: Form) => Promise<void> | void;
   afterSubmit?: (entity: DbEntity) => Promise<void> | void;
+  children?: React.ReactNode;
 };
 
 export const StrapiEdit: React.FC<Props> = ({

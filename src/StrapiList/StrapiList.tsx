@@ -9,7 +9,7 @@ import { ItemContext } from './items';
 
 type Props = {
   resourceUrl: string;
-  children: React.ReactElement;
+  children?: React.ReactElement;
   filter?: React.ReactNode;
   sorting?: {
     default: {
@@ -94,7 +94,7 @@ const StrapiList: React.FC<Props> = ({ resourceUrl, children, sorting, initialPa
         idForItem={(item, index) => String(_.get(item, 'id', index))}
         renderItem={(item, id, index) => (
           <ItemContext.Provider value={{ id, index, item: _.get(item, 'attributes', {}), isLoading }}>
-            {React.cloneElement(children)}
+            {children ? React.cloneElement(children) : null}
           </ItemContext.Provider>
         )}
         // filtering

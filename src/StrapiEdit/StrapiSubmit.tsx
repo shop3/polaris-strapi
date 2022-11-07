@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from '@shopify/polaris';
 
-type Props = Pick<ButtonProps, 'primary' | 'size'> & {
+type Props = Pick<ButtonProps, 'primary' | 'size' | 'children'> & {
   formId: string;
 };
 
