@@ -1,6 +1,6 @@
 import React, { SyntheticEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { Button, DropZone, Heading, Spinner, Stack, TextStyle } from '@shopify/polaris';
-import { Media, MediaProps } from '@strapify/polaris-common';
+import { Media, MediaProps } from '@shop3/polaris-common';
 import _ from 'lodash';
 import Context from '../context';
 import fetchFiles from './fetchFiles';

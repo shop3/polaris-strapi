@@ -1,6 +1,6 @@
 import React from 'react';
 import { SkeletonBodyText } from '@shopify/polaris';
-import PolarisMarkdown from '@strapify/polaris-markdown';
+import PolarisMarkdown from '@shop3/polaris-markdown';
 import _ from 'lodash';
 import { useResource } from '../hooks';
 

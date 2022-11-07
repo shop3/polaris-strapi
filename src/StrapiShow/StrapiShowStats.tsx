@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisplayStats } from '@strapify/polaris-common';
+import { DisplayStats } from '@shop3/polaris-common';
 import _ from 'lodash';
 import { SkeletonBodyText } from '@shopify/polaris';
 import { useResource } from '../hooks';

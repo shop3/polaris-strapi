@@ -1,11 +1,11 @@
-# Strapify Polaris Strapi
+# Shop3 Polaris Strapi
 
 Polaris components that integrate with a Strapi application.
 
 ## Installation
 
 ```bash
-npm install --save @strapify/polaris-strapi
+npm install --save @shop3/polaris-strapi
 ```
 
 

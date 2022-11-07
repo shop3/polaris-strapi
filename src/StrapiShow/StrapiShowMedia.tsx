@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from '@shopify/polaris';
-import { Media, SkeletonMedia } from '@strapify/polaris-common';
+import { Media, SkeletonMedia } from '@shop3/polaris-common';
 import _ from 'lodash';
 import { useResource } from '../hooks';
 
