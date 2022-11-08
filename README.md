@@ -1,6 +1,6 @@
 # Shop3 Polaris Strapi
 
-Polaris components that integrate with a Strapi application.
+Collection of Polaris components ready to use with Strapi in Shopify applications.
 
 ## Installation
 
