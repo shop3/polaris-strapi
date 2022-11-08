@@ -1,7 +1,8 @@
 {
   "name": "@shop3/polaris-strapi",
   "version": "0.0.4",
-  "description": "Polaris strapi components",
+  "description": "Collection of Polaris components ready to use with Strapi in Shopify applications.",
+  "homepage": "http://shop3.github.io/polaris-strapi",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -11,6 +12,7 @@
   "scripts": {
     "build": "webpack",
     "develop": "start-storybook -p 6006",
+    "deploy": "gh-pages -d pages",
     "release": "standard-version",
     "lint": "eslint --fix .",
     "lint:staged": "eslint --fix",
@@ -18,7 +20,8 @@
     "msw:init": "msw init .storybook/public/ --save",
     "pre-commit": "lint-staged",
     "commit-msg": "commitlint --edit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "predeploy": "npm run msw:init && build-storybook -o pages"
   },
   "peerDependencies": {
     "@shop3/polaris-common": "^0.1.0",
@@ -58,6 +61,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
+    "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
