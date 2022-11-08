@@ -5,13 +5,14 @@ import { useResource } from '../hooks';
 
 type Props = Omit<PageProps, 'title' | 'subtitle' | 'titleMetadata'> & {
   resourceUrl: string;
+  authToken?: string;
   titleField: string;
   subtitleField?: string;
   renderTitleMetadata?: (data: any) => React.ReactNode;
 };
 
-const StrapiShowPage: React.FC<Props> = ({ resourceUrl, children, ...props }) => {
-  const { data: response } = useResource(resourceUrl);
+const StrapiShowPage: React.FC<Props> = ({ resourceUrl, authToken, children, ...props }) => {
+  const { data: response } = useResource(resourceUrl, authToken);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

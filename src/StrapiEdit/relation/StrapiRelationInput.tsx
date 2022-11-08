@@ -14,6 +14,7 @@ type Props = {
   label: string;
   field: string;
   resourceUrl: string;
+  authToken?: string;
   displayField: string;
   multiple?: boolean;
   description?: string;
@@ -34,7 +35,8 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
     `${relation.resourceUrl}?${qs.stringify({
       _q: searchQuery,
       populate: relation.field,
-    })}`
+    })}`,
+    relation.authToken
   );
 
   const isLoading = typeof response === 'undefined' || isValidating;

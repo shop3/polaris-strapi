@@ -6,12 +6,13 @@ import { useResource } from '../hooks';
 
 type Props = {
   resourceUrl: string;
+  authToken?: string;
   field: string;
   multiple: boolean;
 };
 
-const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, field, multiple }) => {
-  const { data: response } = useResource(resourceUrl);
+const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, authToken, field, multiple }) => {
+  const { data: response } = useResource(resourceUrl, authToken);
 
   const isLoading = typeof response === 'undefined';
   const data: any = _.get(response, `data.attributes.${field}.data.attributes`, {});

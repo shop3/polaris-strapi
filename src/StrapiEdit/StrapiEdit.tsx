@@ -9,6 +9,7 @@ type Props = {
   formId: string;
   resourceUrl: string;
   method: 'POST' | 'PUT';
+  authToken?: string;
   initialValue?: Form;
   beforeSubmit?: (form: Form) => Promise<void> | void;
   afterSubmit?: (entity: DbEntity) => Promise<void> | void;
@@ -18,6 +19,7 @@ type Props = {
 export const StrapiEdit: React.FC<Props> = ({
   resourceUrl,
   method,
+  authToken,
   formId,
   initialValue,
   beforeSubmit,
@@ -40,7 +42,7 @@ export const StrapiEdit: React.FC<Props> = ({
       dispatch({ type: 'send' });
       const formReq = _.cloneDeep(state.form);
       if (beforeSubmit) await beforeSubmit(formReq);
-      const result = await sendRequest(resourceUrl, method, formReq);
+      const result = await sendRequest(resourceUrl, method, formReq, authToken);
       if (afterSubmit) await afterSubmit(result);
       dispatch({ type: 'done' });
     },
@@ -56,14 +58,12 @@ export const StrapiEdit: React.FC<Props> = ({
   );
 };
 
-async function sendRequest(resourceUrl: string, httpMethod: 'POST' | 'PUT', form: Form) {
+async function sendRequest(resourceUrl: string, httpMethod: 'POST' | 'PUT', form: Form, authToken?: string) {
   const files = await uploadRequest(form);
   const response = await fetch(resourceUrl, {
     method: (httpMethod || 'POST').toLowerCase(),
     body: JSON.stringify({ data: _.merge(form, files) }),
-    headers: new Headers({
-      'Content-Type': 'application/json',
-    }),
+    headers: getHeadersAuthToken(authToken),
   });
   if (response.status >= 400) {
     throw new Error('failed to send request');
@@ -85,4 +85,16 @@ async function uploadRequest(form: Form) {
     }
   }
   return outputs;
+}
+
+function getHeadersAuthToken(authToken?: string) {
+  if (authToken) {
+    return new Headers({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    });
+  }
+  return new Headers({
+    'Content-Type': 'application/json',
+  });
 }

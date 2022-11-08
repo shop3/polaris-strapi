@@ -1,8 +1,8 @@
 import { DbFile, isFileArray } from './types';
 
-async function uploadFiles(input: File): Promise<DbFile>;
-async function uploadFiles(input: File[]): Promise<DbFile[]>;
-async function uploadFiles(input: File | File[]): Promise<DbFile | DbFile[]> {
+async function uploadFiles(input: File, authToken?: string): Promise<DbFile>;
+async function uploadFiles(input: File[], authToken?: string): Promise<DbFile[]>;
+async function uploadFiles(input: File | File[], authToken?: string): Promise<DbFile | DbFile[]> {
   const formData = new FormData();
   if (input instanceof File) {
     formData.append('files', input, input.name);
@@ -14,6 +14,7 @@ async function uploadFiles(input: File | File[]): Promise<DbFile | DbFile[]> {
   const response = await fetch('/api/upload', {
     method: 'post',
     body: formData,
+    headers: getHeadersAuthToken(authToken),
   });
   if (response.status >= 400) {
     const result = await response.json().catch(() => undefined);
@@ -29,3 +30,12 @@ async function uploadFiles(input: File | File[]): Promise<DbFile | DbFile[]> {
 }
 
 export default uploadFiles;
+
+function getHeadersAuthToken(authToken?: string): Headers {
+  if (authToken) {
+    return new Headers({
+      Authorization: `Bearer ${authToken}`,
+    });
+  }
+  return new Headers();
+}

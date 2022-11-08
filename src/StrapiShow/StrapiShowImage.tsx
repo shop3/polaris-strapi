@@ -4,12 +4,13 @@ import { useResource } from '../hooks';
 
 type Props = {
   resourceUrl: string;
+  authToken?: string;
   field: string;
   size?: 'small' | 'medium' | 'large';
 };
 
-const StrapiShowImage: React.FC<Props> = ({ resourceUrl, field, size }) => {
-  const { data: response } = useResource(resourceUrl);
+const StrapiShowImage: React.FC<Props> = ({ resourceUrl, authToken, field, size }) => {
+  const { data: response } = useResource(resourceUrl, authToken);
 
   const isLoading = typeof response === 'undefined';
   const data = _.get(response, 'data.attributes', {});

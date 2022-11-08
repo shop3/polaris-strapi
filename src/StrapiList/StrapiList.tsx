@@ -9,6 +9,7 @@ import { ItemContext } from './items';
 
 type Props = {
   resourceUrl: string;
+  authToken?: string;
   children?: React.ReactElement;
   filter?: React.ReactNode;
   sorting?: {
@@ -33,7 +34,14 @@ type ItemsState = {
   totalItems: number;
 };
 
-const StrapiList: React.FC<Props> = ({ resourceUrl, children, sorting, initialPagination, filter: filterMarkup }) => {
+const StrapiList: React.FC<Props> = ({
+  resourceUrl,
+  authToken,
+  children,
+  sorting,
+  initialPagination,
+  filter: filterMarkup,
+}) => {
   // searching
   const [query, setQuery] = useState<string>('');
   // filtering
@@ -70,7 +78,8 @@ const StrapiList: React.FC<Props> = ({ resourceUrl, children, sorting, initialPa
         pagination,
         sort,
       })
-    )}`
+    )}`,
+    authToken
   );
   // get is loading
   const isLoading = typeof response === 'undefined' || isValidating;
