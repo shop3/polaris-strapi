@@ -4,7 +4,7 @@ on:
   release:
     types: [created]
 env:
-  PUBLIC_PATH: /polaris-strapi
+  PUBLIC_URL: /polaris-strapi
 jobs:
   deploy:
     runs-on: ubuntu-latest
