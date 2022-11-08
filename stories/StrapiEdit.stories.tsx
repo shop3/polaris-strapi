@@ -76,7 +76,7 @@ Example.parameters = {
     handlers: [
       rest.post('/api/upload', async (req, res, ctx) => {
         const response = [];
-        const files: File[] | File = _.get(req, 'body.files');
+        const files: File[] | File = _.get(req, 'body.files') as any;
         if (Array.isArray(files)) {
           for (const f of files) {
             response.push({
@@ -150,7 +150,7 @@ InitialValue.parameters = {
     handlers: [
       rest.post('/api/upload', (req, res, ctx) => {
         const response = [];
-        const files: File[] | File = _.get(req, 'body.files');
+        const files: File[] | File = _.get(req, 'body.files') as any;
         if (Array.isArray(files)) {
           for (const f of files) {
             response.push({

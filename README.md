@@ -18,6 +18,8 @@ npm install --save @shop3/polaris-strapi
 npm install
 
 npm run husky:install
+
+npm run msw:init
 ```
 
 ## Development

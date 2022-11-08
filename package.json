@@ -15,16 +15,17 @@
     "lint": "eslint --fix .",
     "lint:staged": "eslint --fix",
     "husky:install": "husky install",
+    "msw:init": "msw init .storybook/public/ --save",
     "pre-commit": "lint-staged",
     "commit-msg": "commitlint --edit",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@shop3/polaris-common": "^0.1.0",
+    "@shop3/polaris-markdown": "^0.1.0",
     "@shopify/polaris": "^9.24.0",
     "@shopify/polaris-icons": "^4.23.0",
     "@shopify/react-i18n": "^7.3.0",
-    "@shop3/polaris-common": "^0.1.0",
-    "@shop3/polaris-markdown": "^0.1.0",
     "lodash": "^4.17.21",
     "qs": "^6.11.0",
     "react": "^17.0.2",
@@ -60,7 +61,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "msw": "^0.42.3",
+    "msw": "^0.47.4",
     "msw-storybook-addon": "^1.6.3",
     "prettier": "^2.7.1",
     "standard-version": "^9.5.0",
@@ -74,5 +75,8 @@
     "*.(ts|tsx|js)": [
       "npm run lint:staged"
     ]
+  },
+  "msw": {
+    "workerDirectory": ".storybook\\public"
   }
 }

@@ -97,6 +97,7 @@ node_modules
 ############################
 
 coverage
+.storybook/public/mockServiceWorker.js
 
 
 ############################
