@@ -97,6 +97,6 @@
     ]
   },
   "msw": {
-    "workerDirectory": ".storybook\\public"
+    "workerDirectory": ".storybook/public"
   }
 }
