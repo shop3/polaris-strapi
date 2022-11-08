@@ -16,15 +16,20 @@ export default {
 };
 
 const Template = ({ id }: any) => (
-  <StrapiShowPage resourceUrl={`/api/test/${id}`} titleField="title" subtitleField="description" compactTitle>
+  <StrapiShowPage
+    resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`}
+    titleField="title"
+    subtitleField="description"
+    compactTitle
+  >
     <Layout>
       <Layout.Section oneThird>
-        <StrapiShowImage resourceUrl={`/api/test/${id}`} field="image" size="large" />
+        <StrapiShowImage resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="image" size="large" />
       </Layout.Section>
       <Layout.Section>
         <Card sectioned>
           <StrapiShowStats
-            resourceUrl={`/api/test/${id}`}
+            resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`}
             stats={[
               { icon: 'ActivitiesMajor', label: 'Games', field: 'games' },
               { icon: 'FavoriteMajor', label: 'Victories', field: 'victories' },
@@ -34,12 +39,12 @@ const Template = ({ id }: any) => (
         </Card>
         <Card sectioned>
           <TextContainer>
-            <StrapiShowTitle resourceUrl={`/api/test/${id}`} field="title" />
-            <StrapiShowText resourceUrl={`/api/test/${id}`} field="description" />
+            <StrapiShowTitle resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="title" />
+            <StrapiShowText resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="description" />
           </TextContainer>
         </Card>
         <Card sectioned>
-          <StrapiShowJson resourceUrl={`/api/test/${id}`} field="player" />
+          <StrapiShowJson resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="player" />
         </Card>
       </Layout.Section>
     </Layout>
@@ -55,7 +60,7 @@ Example.args = {
 Example.parameters = {
   msw: {
     handlers: [
-      rest.get('/api/test/:id', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/test/:id', (req, res, ctx) => {
         const { id } = req.params;
         return res(
           ctx.delay(800),
@@ -69,7 +74,7 @@ Example.parameters = {
                 image: {
                   data: {
                     attributes: {
-                      url: '/assets/placeholder-vertical.png',
+                      url: process.env.PUBLIC_URL + '/assets/placeholder-vertical.png',
                     },
                   },
                 },
@@ -99,7 +104,7 @@ Loading.args = {
 Loading.parameters = {
   msw: {
     handlers: [
-      rest.get('/api/test/:id', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/test/:id', (req, res, ctx) => {
         return res(ctx.delay('infinite'));
       }),
     ],

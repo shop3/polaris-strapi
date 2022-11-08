@@ -91,6 +91,9 @@ const withProviders = (Story, context) => {
 export const decorators = [withProviders, mswDecorator];
 
 initialize({
+  serviceWorker: {
+    url: process.env.PUBLIC_URL + '/mockServiceWorker.js',
+  },
   onUnhandledRequest: 'bypass',
   waitUntilReady: true,
 });

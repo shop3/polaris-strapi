@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   release:
     types: [created]
+env:
+  PUBLIC_PATH: /polaris-strapi
 jobs:
   deploy:
     runs-on: ubuntu-latest

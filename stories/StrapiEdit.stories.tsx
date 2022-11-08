@@ -28,7 +28,12 @@ const Template = ({ initialValue }: any) => (
       </StrapiSubmit>
     }
   >
-    <StrapiEdit formId="strapi-edit-form" resourceUrl="/api/test" method="POST" initialValue={initialValue}>
+    <StrapiEdit
+      formId="strapi-edit-form"
+      resourceUrl={process.env.PUBLIC_URL + '/api/test'}
+      method="POST"
+      initialValue={initialValue}
+    >
       <Layout>
         <Layout.Section>
           <Card sectioned>
@@ -57,10 +62,16 @@ const Template = ({ initialValue }: any) => (
               <StrapiRelationInput
                 label="Category"
                 field="category"
-                resourceUrl="/api/categories"
+                resourceUrl={process.env.PUBLIC_URL + '/api/categories'}
                 displayField="name"
               />
-              <StrapiRelationInput label="Tags" field="tags" resourceUrl="/api/tags" displayField="value" multiple />
+              <StrapiRelationInput
+                label="Tags"
+                field="tags"
+                resourceUrl={process.env.PUBLIC_URL + '/api/tags'}
+                displayField="value"
+                multiple
+              />
             </FormLayout>
           </Card>
         </Layout.Section>
@@ -74,7 +85,7 @@ export const Example: any = Template.bind({});
 Example.parameters = {
   msw: {
     handlers: [
-      rest.post('/api/upload', async (req, res, ctx) => {
+      rest.post(process.env.PUBLIC_URL + '/api/upload', async (req, res, ctx) => {
         const response = [];
         const files: File[] | File = _.get(req, 'body.files') as any;
         if (Array.isArray(files)) {
@@ -84,7 +95,7 @@ Example.parameters = {
               name: f.name,
               mime: f.type,
               size: f.size / 1000,
-              url: '/assets/placeholder.png',
+              url: process.env.PUBLIC_URL + '/assets/placeholder.png',
             });
           }
         } else {
@@ -94,17 +105,17 @@ Example.parameters = {
             name: f.name,
             mime: f.type,
             size: f.size / 1000,
-            url: '/assets/placeholder.png',
+            url: process.env.PUBLIC_URL + '/assets/placeholder.png',
           });
         }
         return res(ctx.delay(3000), ctx.json(response));
       }),
 
-      rest.post('/api/test', (req, res, ctx) => {
+      rest.post(process.env.PUBLIC_URL + '/api/test', (req, res, ctx) => {
         return res(ctx.delay(800), ctx.json({}));
       }),
 
-      rest.get('/api/categories', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/categories', (req, res, ctx) => {
         return res(
           ctx.delay(800),
           ctx.json({
@@ -117,7 +128,7 @@ Example.parameters = {
         );
       }),
 
-      rest.get('/api/tags', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/tags', (req, res, ctx) => {
         return res(
           ctx.delay(800),
           ctx.json({
@@ -148,7 +159,7 @@ InitialValue.args = {
 InitialValue.parameters = {
   msw: {
     handlers: [
-      rest.post('/api/upload', (req, res, ctx) => {
+      rest.post(process.env.PUBLIC_URL + '/api/upload', (req, res, ctx) => {
         const response = [];
         const files: File[] | File = _.get(req, 'body.files') as any;
         if (Array.isArray(files)) {
@@ -158,7 +169,7 @@ InitialValue.parameters = {
               name: f.name,
               mime: f.type,
               size: f.size / 1000,
-              url: '/assets/placeholder.png',
+              url: process.env.PUBLIC_URL + '/assets/placeholder.png',
             });
           }
         } else {
@@ -168,17 +179,17 @@ InitialValue.parameters = {
             name: f.name,
             mime: f.type,
             size: f.size / 1000,
-            url: '/assets/placeholder.png',
+            url: process.env.PUBLIC_URL + '/assets/placeholder.png',
           });
         }
         return res(ctx.delay(3000), ctx.json(response));
       }),
 
-      rest.post('/api/test', (req, res, ctx) => {
+      rest.post(process.env.PUBLIC_URL + '/api/test', (req, res, ctx) => {
         return res(ctx.delay(800), ctx.json({}));
       }),
 
-      rest.get('/api/upload/files', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/upload/files', (req, res, ctx) => {
         const params = qs.parse(req.url.searchParams.toString());
         const { filters }: any = params;
         if (!filters || !filters.id || !filters.id.$in) return res(ctx.json([]));
@@ -187,7 +198,7 @@ InitialValue.parameters = {
           ctx.json({
             results: filters.id.$in.map((id: number | string) => ({
               id,
-              url: '/assets/placeholder.png',
+              url: process.env.PUBLIC_URL + '/assets/placeholder.png',
               name: 'placeholder.png',
               mime: 'image/png',
               size: 67.5,
@@ -196,7 +207,7 @@ InitialValue.parameters = {
         );
       }),
 
-      rest.get('/api/categories', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/categories', (req, res, ctx) => {
         return res(
           ctx.delay(800),
           ctx.json({
@@ -209,7 +220,7 @@ InitialValue.parameters = {
         );
       }),
 
-      rest.get('/api/tags', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/tags', (req, res, ctx) => {
         return res(
           ctx.delay(800),
           ctx.json({

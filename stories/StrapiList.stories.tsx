@@ -13,7 +13,7 @@ export default {
 const Template = ({ resource }: any) => (
   <Page title="List">
     <StrapiList
-      resourceUrl={`/api/${resource}`}
+      resourceUrl={`${process.env.PUBLIC_URL}/api/${resource}`}
       sorting={{
         default: { field: 'id', order: 'asc' },
         options: [
@@ -42,7 +42,7 @@ const Template = ({ resource }: any) => (
         />
       }
     >
-      <StrapiListItem resourceUrl={`/api/${resource}`} nameField="name" mediaField="image">
+      <StrapiListItem resourceUrl={`${process.env.PUBLIC_URL}/api/${resource}`} nameField="name" mediaField="image">
         <TextContainer>
           <h2>
             <StrapiListText textField="name" variation="strong" />
@@ -64,7 +64,7 @@ Example.args = {
 Example.parameters = {
   msw: {
     handlers: [
-      rest.get('/api/tests', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/tests', (req, res, ctx) => {
         return res(
           ctx.delay(800),
           ctx.json({
@@ -77,7 +77,7 @@ Example.parameters = {
                   image: {
                     data: {
                       attributes: {
-                        url: '/assets/placeholder.png',
+                        url: process.env.PUBLIC_URL + '/assets/placeholder.png',
                       },
                     },
                   },
@@ -91,7 +91,7 @@ Example.parameters = {
                   image: {
                     data: {
                       attributes: {
-                        url: '/assets/placeholder.png',
+                        url: process.env.PUBLIC_URL + '/assets/placeholder.png',
                       },
                     },
                   },
@@ -105,7 +105,7 @@ Example.parameters = {
                   image: {
                     data: {
                       attributes: {
-                        url: '/assets/placeholder.png',
+                        url: process.env.PUBLIC_URL + '/assets/placeholder.png',
                       },
                     },
                   },
@@ -128,7 +128,7 @@ Loading.args = {
 Loading.parameters = {
   msw: {
     handlers: [
-      rest.get('/api/loadings', (req, res, ctx) => {
+      rest.get(process.env.PUBLIC_URL + '/api/loadings', (req, res, ctx) => {
         return res(ctx.delay('infinite'));
       }),
     ],
