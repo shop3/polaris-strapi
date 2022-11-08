@@ -8,7 +8,9 @@ Collection of Polaris components ready to use with Strapi in Shopify application
 npm install --save @shop3/polaris-strapi
 ```
 
+## Storybook
 
+Components are documented in Storybook at https://shop3.github.io/polaris-strapi/
 
 # Development
 
