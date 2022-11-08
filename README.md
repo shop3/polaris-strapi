@@ -100,7 +100,7 @@ const App = () => {
 ## Strapi Show
 
 ```jsx
-import { Card } from '@shopify/polaris';
+import { Card, Layout } from '@shopify/polaris';
 import { StrapiShowPage, StrapiShowText } from '@shop3/polaris-strapi';
 
 const App = () => {
