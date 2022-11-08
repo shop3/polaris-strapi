@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/shop3/polaris-strapi/compare/v0.0.4...v0.1.0) (2022-11-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* added auth token to every fetch
+
+### Features
+
+* added auth token to every fetch ([4a1c9a1](https://github.com/shop3/polaris-strapi/commit/4a1c9a1e72d3a18aa458e6f6726d3d24bb66d121))
+
+
+### Bug Fixes
+
+* fixed typescript types ([8ab6126](https://github.com/shop3/polaris-strapi/commit/8ab6126af3d3d1b26645c1676298d66ddda61336))
+
 ### [0.0.4](https://github.com/shop3/polaris-strapi/compare/v0.0.3...v0.0.4) (2022-06-09)
 
 ### [0.0.3](https://github.com/shop3/polaris-strapi/compare/v0.0.2...v0.0.3) (2022-05-31)

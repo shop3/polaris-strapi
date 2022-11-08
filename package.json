@@ -1,6 +1,6 @@
 {
   "name": "@shop3/polaris-strapi",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Collection of Polaris components ready to use with Strapi in Shopify applications.",
   "homepage": "http://shop3.github.io/polaris-strapi",
   "license": "MIT",
