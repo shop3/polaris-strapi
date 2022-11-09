@@ -26,7 +26,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
 
   // handle initial value
   useEffect(() => {
-    if (form[attribute.field]) {
+    if (form && form[attribute.field]) {
       if (!attribute.multiple) {
         const file = form[attribute.field];
         if (isId(file)) {
