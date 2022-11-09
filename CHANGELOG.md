@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/shop3/polaris-strapi/compare/v0.1.0...v0.1.1) (2022-11-09)
+
+
+### Bug Fixes
+
+* **auth:** auth token in media input fetch and upload ([403ae27](https://github.com/shop3/polaris-strapi/commit/403ae273b8790192692973268c2b0253059a892f))
+* **edit:** temporary fix to continue editing if the request fails ([7f3f897](https://github.com/shop3/polaris-strapi/commit/7f3f897647fb928ce14ca4ec18af4e62688ad09b))
+* **media:** multiple media input optional ([d3696c8](https://github.com/shop3/polaris-strapi/commit/d3696c85c621539212e142fa3c2acb49fff477db))
+* msw working directory ([e20f1b5](https://github.com/shop3/polaris-strapi/commit/e20f1b549392666b942b2f8268f51dcc4f65b9a6))
+* storybook public path ([4197ad5](https://github.com/shop3/polaris-strapi/commit/4197ad5a14a06e461177551c62f688321d7dd239))
+* storybook public url ([687e0c3](https://github.com/shop3/polaris-strapi/commit/687e0c3411bdd6dea27423ff7e61fd6562d187ec))
+* **types:** strapi list item children optional ([22a65b7](https://github.com/shop3/polaris-strapi/commit/22a65b7f9042057b28b3972dea6cb0eca44238b7))
+
 ## [0.1.0](https://github.com/shop3/polaris-strapi/compare/v0.0.4...v0.1.0) (2022-11-08)
 
 
