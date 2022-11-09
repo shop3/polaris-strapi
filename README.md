@@ -36,7 +36,7 @@ const App = () => {
         {/* number input */}
         <StrapiNumberInput label="Quantity" field="quantity" />
         {/* media input */}
-        <StrapiMediaInput label="Image" field="image" mediaType="image" authToken={/* api auth token */} />
+        <StrapiMediaInput label="Image" field="image" mediaType="image" />
         {/* enum input */}
         <StrapiEnumInput
           label="Color"
