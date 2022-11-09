@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/shop3/polaris-strapi/compare/v0.1.1...v0.1.2) (2022-11-09)
+
+
+### Bug Fixes
+
+* **edit:** media input check form initial value is not undefined ([bda98b8](https://github.com/shop3/polaris-strapi/commit/bda98b83504a8d232429f4c395600cc8d4176422))
+
 ### [0.1.1](https://github.com/shop3/polaris-strapi/compare/v0.1.0...v0.1.1) (2022-11-09)
 
 
