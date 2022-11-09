@@ -29,7 +29,7 @@
   },
   "peerDependencies": {
     "@shop3/polaris-common": "^0.1.0",
-    "@shop3/polaris-markdown": "^0.1.0",
+    "@shop3/polaris-markdown": "^0.1.1",
     "@shopify/polaris": "^9.24.0",
     "@shopify/polaris-icons": "^4.23.0",
     "@shopify/react-i18n": "^7.3.0",
