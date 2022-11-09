@@ -89,6 +89,7 @@ const App = () => {
     >
       <StrapiListItem resourceUrl="/api/greetings" nameField="from" mediaField="image">
         <TextContainer>
+          <StrapiListText textField="title" variation="strong" />
           <StrapiListText textField="message" />
         </TextContainer>
       </StrapiListItem>
