@@ -14,7 +14,7 @@ type Props = {
   placeholder?: string;
   mediaType: 'file' | 'image';
   accept?: string;
-  multiple: boolean;
+  multiple?: boolean;
 };
 
 type FilesState = Array<MediaProps & { id: number }>;
@@ -148,7 +148,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         label={<Heading>{attribute.label}</Heading>}
         type={attribute.mediaType}
         accept={attribute.accept}
-        allowMultiple={attribute.multiple}
+        allowMultiple={_.get(attribute, 'multiple', false)}
         onDrop={handleDropZoneDrop}
         variableHeight
       >
