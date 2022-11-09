@@ -19,11 +19,11 @@ async function fetchFiles(
     const result = await response.json().catch(() => undefined);
     throw new Error(`Failed to get files: ${result ? JSON.stringify(result.error, null, 2) : 'unknown error'}`);
   }
-  const result = await response.json();
+  const results = await response.json();
   if (Array.isArray(input)) {
-    return result.results;
+    return results;
   } else {
-    return result.results[0];
+    return results[0];
   }
 }
 
