@@ -39,12 +39,16 @@ export const StrapiEdit: React.FC<Props> = ({
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault();
-      dispatch({ type: 'send' });
-      const formReq = _.cloneDeep(state.form);
-      if (beforeSubmit) await beforeSubmit(formReq);
-      const result = await sendRequest(resourceUrl, method, formReq, authToken);
-      if (afterSubmit) await afterSubmit(result);
-      dispatch({ type: 'done' });
+      try {
+        dispatch({ type: 'send' });
+        const formReq = _.cloneDeep(state.form);
+        if (beforeSubmit) await beforeSubmit(formReq);
+        const result = await sendRequest(resourceUrl, method, formReq, authToken);
+        if (afterSubmit) await afterSubmit(result);
+        dispatch({ type: 'done' });
+      } catch (e) {
+        dispatch({ type: 'edit', form: state.form });
+      }
     },
     [resourceUrl, method, state, beforeSubmit, afterSubmit]
   );
