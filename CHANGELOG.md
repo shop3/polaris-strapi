@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/shop3/polaris-strapi/compare/v0.1.2...v0.1.3) (2022-11-09)
+
+
+### Bug Fixes
+
+* **edit:** fixed fetch files results ([227c872](https://github.com/shop3/polaris-strapi/commit/227c872c3f95ead117893f3800471d01fc3d9af9))
+* **storybook:** edit story fetch files results ([b7a2d00](https://github.com/shop3/polaris-strapi/commit/b7a2d00a9329a75d31253003931615b09714212d))
+
 ### [0.1.2](https://github.com/shop3/polaris-strapi/compare/v0.1.1...v0.1.2) (2022-11-09)
 
 
