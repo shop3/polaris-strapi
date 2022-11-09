@@ -20,7 +20,7 @@ type Props = {
 type FilesState = Array<MediaProps & { id: number }>;
 
 const StrapiMediaInput: React.FC<Props> = (attribute) => {
-  const { form, setForm } = useContext(Context);
+  const { form, setForm, authToken } = useContext(Context);
   const [files, setFiles] = useState<FilesState>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         const file = form[attribute.field];
         if (isId(file)) {
           setLoading(true);
-          fetchFiles(file).then((fileDb) => {
+          fetchFiles(file, authToken).then((fileDb) => {
             setFiles([
               {
                 id: fileDb.id,
@@ -58,7 +58,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         const files = form[attribute.field];
         if (isIdArray(files)) {
           setLoading(true);
-          fetchFiles(files).then((filesDb) => {
+          fetchFiles(files, authToken).then((filesDb) => {
             setFiles(
               filesDb.map((fileDb) => ({
                 id: fileDb.id,
@@ -91,7 +91,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         // single file
         const fileToUpload: File = acceptedFiles[0];
         setLoading(true);
-        uploadFiles(fileToUpload).then((fileDb) => {
+        uploadFiles(fileToUpload, authToken).then((fileDb) => {
           const newFile = {
             id: fileDb.id,
             url: fileDb.url,
@@ -107,7 +107,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         // multiple files
         const filesToUpload: File[] = acceptedFiles;
         setLoading(true);
-        uploadFiles(filesToUpload).then((filesDb) => {
+        uploadFiles(filesToUpload, authToken).then((filesDb) => {
           const newFiles = filesDb.map((fileDb) => ({
             id: fileDb.id,
             url: fileDb.url,

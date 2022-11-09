@@ -50,7 +50,7 @@ export const StrapiEdit: React.FC<Props> = ({
   );
 
   return (
-    <context.Provider value={{ form: state.form, setForm, formErrors }}>
+    <context.Provider value={{ form: state.form, setForm, formErrors, authToken }}>
       <form id={formId} method={method} onSubmit={handleSubmit}>
         {children}
       </form>

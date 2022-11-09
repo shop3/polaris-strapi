@@ -5,6 +5,7 @@ type Context = {
   form: Form;
   setForm: (data: Form) => void;
   formErrors: { [k in keyof Form]: string };
+  authToken?: string;
 };
 
 export default React.createContext<Context>({} as Context);
