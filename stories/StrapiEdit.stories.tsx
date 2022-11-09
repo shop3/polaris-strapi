@@ -195,15 +195,15 @@ InitialValue.parameters = {
         if (!filters || !filters.id || !filters.id.$in) return res(ctx.json([]));
         return res(
           ctx.delay(800),
-          ctx.json({
-            results: filters.id.$in.map((id: number | string) => ({
+          ctx.json(
+            filters.id.$in.map((id: number | string) => ({
               id,
               url: process.env.PUBLIC_URL + '/assets/placeholder.png',
               name: 'placeholder.png',
               mime: 'image/png',
               size: 67.5,
-            })),
-          })
+            }))
+          )
         );
       }),
 
