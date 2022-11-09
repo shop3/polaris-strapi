@@ -7,7 +7,7 @@ type Props = {
   resourceUrl: string;
   nameField?: string;
   mediaField?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const StrapiListItem: React.FC<Props> = ({ resourceUrl, nameField, mediaField, children }) => {
