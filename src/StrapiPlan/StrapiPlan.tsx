@@ -17,6 +17,8 @@ type PlanData = {
   trialDays: number;
   usageCappedAmount: number;
   usageTerms: string;
+  paymentsMode: string;
+  oneTimePrice: number;
 };
 
 const StrapiPlan: React.FC<StrapiPlanProps> = ({ resourceUrl, authToken }) => {
@@ -35,6 +37,8 @@ const StrapiPlan: React.FC<StrapiPlanProps> = ({ resourceUrl, authToken }) => {
             trialDays={plan.trialDays}
             usageCappedAmount={plan.usageCappedAmount}
             usageTerms={plan.usageTerms}
+            paymentsMode={plan.paymentsMode}
+            oneTimePrice={plan.oneTimePrice}
           />
         </Card.Section>
       ))}
