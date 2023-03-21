@@ -4,6 +4,7 @@ import reducer from './state';
 import context from './context';
 import { Form, DbEntity } from './types';
 import { isFileArray, uploadFiles } from './media';
+import { createErrorFromJson, parseValidationErrors } from './errors';
 
 type Props = {
   formId: string;
@@ -27,7 +28,7 @@ export const StrapiEdit: React.FC<Props> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, { state: 'idle', form: initialValue || {} });
-  const formErrors = {};
+  const [formErrors, setFormErrors] = React.useState<Record<string, string>>({});
 
   const setForm = useCallback(
     (form: Form) => {
@@ -47,6 +48,8 @@ export const StrapiEdit: React.FC<Props> = ({
         if (afterSubmit) await afterSubmit(result);
         dispatch({ type: 'done' });
       } catch (e) {
+        const formErrors = await parseValidationErrors(e);
+        if (formErrors) setFormErrors(formErrors);
         dispatch({ type: 'edit', form: state.form });
       }
     },
@@ -70,7 +73,8 @@ async function sendRequest(resourceUrl: string, httpMethod: 'POST' | 'PUT', form
     headers: getHeadersAuthToken(authToken),
   });
   if (response.status >= 400) {
-    throw new Error('failed to send request');
+    const { error } = await response.json();
+    throw createErrorFromJson(error);
   }
   const result = await response.json();
   return result;

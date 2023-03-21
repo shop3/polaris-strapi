@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { Combobox, Heading, Listbox, Stack, Tag, TextStyle } from '@shopify/polaris';
+import { Combobox, Heading, InlineError, Listbox, Stack, Tag, TextStyle } from '@shopify/polaris';
 import qs from 'qs';
 import _ from 'lodash';
 import context from '../context';
@@ -22,7 +22,7 @@ type Props = {
 };
 
 const StrapiInputRelation: React.FC<Props> = (relation) => {
-  const { form, setForm } = useContext(context);
+  const { form, setForm, formErrors } = useContext(context);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
@@ -101,6 +101,7 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
       placeholder="Search"
       value={searchQuery}
       onChange={setSearchQuery}
+      error={_.get(formErrors, relation.field, '')}
     />
   );
 
@@ -139,7 +140,7 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
         </div>
       )}
       {relation.description && (
-        <div style={{ marginTop: '0.4rem' }}>
+        <div className="Polaris-Labelled__HelpText">
           <TextStyle variation="subdued">{relation.description}</TextStyle>
         </div>
       )}

@@ -14,7 +14,7 @@ type Props = {
 };
 
 const StrapiNumberInput: React.FC<Props> = (attribute) => {
-  const { form, setForm } = useContext(context);
+  const { form, setForm, formErrors } = useContext(context);
 
   return (
     <TextField
@@ -28,6 +28,7 @@ const StrapiNumberInput: React.FC<Props> = (attribute) => {
       onChange={(value) => setForm({ ...form, [attribute.field]: value })}
       min={attribute.min}
       max={attribute.max}
+      error={_.get(formErrors, attribute.field, '')}
     />
   );
 };

@@ -15,7 +15,7 @@ type Props = {
 };
 
 const StrapiEnumInput: React.FC<Props> = (attribute) => {
-  const { form, setForm } = useContext(context);
+  const { form, setForm, formErrors } = useContext(context);
 
   return (
     <Select
@@ -25,6 +25,7 @@ const StrapiEnumInput: React.FC<Props> = (attribute) => {
       options={attribute.options}
       value={String(_.get(form, attribute.field, ''))}
       onChange={(value) => setForm({ ...form, [attribute.field]: value })}
+      error={_.get(formErrors, attribute.field, '')}
     />
   );
 };

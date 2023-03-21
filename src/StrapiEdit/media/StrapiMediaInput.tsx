@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useCallback, useContext, useEffect, useState } from 'react';
-import { Button, DropZone, Heading, Spinner, Stack, TextStyle } from '@shopify/polaris';
+import { Button, DropZone, Heading, InlineError, Spinner, Stack, TextStyle } from '@shopify/polaris';
 import { Media, MediaProps } from '@shop3/polaris-common';
 import _ from 'lodash';
 import Context from '../context';
@@ -20,7 +20,7 @@ type Props = {
 type FilesState = Array<MediaProps & { id: number }>;
 
 const StrapiMediaInput: React.FC<Props> = (attribute) => {
-  const { form, setForm, authToken } = useContext(Context);
+  const { form, setForm, formErrors, authToken } = useContext(Context);
   const [files, setFiles] = useState<FilesState>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -192,7 +192,16 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
           </div>
         )}
       </DropZone>
-      {attribute.description && <TextStyle variation="subdued">{attribute.description}</TextStyle>}
+      {!_.isUndefined(_.get(formErrors, attribute.field)) && (
+        <div className="Polaris-Labelled__Error">
+          <InlineError message={_.get(formErrors, attribute.field, 'Unknown error')} fieldID={attribute.field} />
+        </div>
+      )}
+      {attribute.description && (
+        <div className="Polaris-Labelled__HelpText">
+          <TextStyle variation="subdued">{attribute.description}</TextStyle>
+        </div>
+      )}
     </>
   );
 };

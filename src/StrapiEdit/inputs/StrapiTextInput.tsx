@@ -16,7 +16,7 @@ type Props = {
 };
 
 const StrapiTextInput: React.FC<Props> = (attribute) => {
-  const { form, setForm } = useContext(context);
+  const { form, setForm, formErrors } = useContext(context);
 
   return (
     <TextField
@@ -32,6 +32,7 @@ const StrapiTextInput: React.FC<Props> = (attribute) => {
       minLength={attribute.minLength}
       maxLength={attribute.maxLength}
       showCharacterCount={attribute.count}
+      error={_.get(formErrors, attribute.field, '')}
     />
   );
 };
