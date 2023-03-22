@@ -11,9 +11,7 @@ export default {
 
 const Template = ({ resource }: any) => (
   <Page fullWidth>
-    <Card>
-      <StrapiPlan resourceUrl={`${process.env.PUBLIC_URL}/api/${resource}`} />
-    </Card>
+    <StrapiPlan resourceUrl={`${process.env.PUBLIC_URL}/api/${resource}`} />
   </Page>
 );
 

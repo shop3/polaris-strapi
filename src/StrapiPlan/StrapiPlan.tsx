@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Card } from '@shopify/polaris';
+import { Columns, Box } from '@shopify/polaris';
 import { PlanCard } from '@shop3/polaris-common';
 import _ from 'lodash';
 import { useResource } from '../hooks';
@@ -26,9 +26,9 @@ const StrapiPlan: React.FC<StrapiPlanProps> = ({ resourceUrl, authToken }) => {
   const data: PlanData[] = _.get(response, 'data', []);
 
   return (
-    <Stack wrap distribution="center">
+    <Columns gap="4" columns={3}>
       {data.map((plan, index) => (
-        <Card.Section key={`sp-${index}`}>
+        <Box key={`sp-${index}`}>
           <PlanCard
             name={plan.name}
             recurringPrice={plan.recurringPrice}
@@ -40,9 +40,9 @@ const StrapiPlan: React.FC<StrapiPlanProps> = ({ resourceUrl, authToken }) => {
             paymentsMode={plan.paymentsMode}
             oneTimePrice={plan.oneTimePrice}
           />
-        </Card.Section>
+        </Box>
       ))}
-    </Stack>
+    </Columns>
   );
 };
 
