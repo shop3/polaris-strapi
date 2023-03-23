@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisplayText, DisplayTextProps, SkeletonDisplayText } from '@shopify/polaris';
+import { Text, DisplayTextProps, SkeletonDisplayText } from '@shopify/polaris';
 import _ from 'lodash';
 import { useResource } from '../hooks';
 
@@ -24,9 +24,9 @@ const StrapiShowTitle: React.FC<Props> = ({ resourceUrl, authToken, field, eleme
   }
 
   return (
-    <DisplayText size={size} element={element}>
+    <Text variant="heading2xl" as="h3">
       {_.get(data, field, '')}
-    </DisplayText>
+    </Text>
   );
 };
 

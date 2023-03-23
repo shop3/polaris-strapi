@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@shopify/polaris';
+import { LegacyStack } from '@shopify/polaris';
 import { Media, SkeletonMedia } from '@shop3/polaris-common';
 import _ from 'lodash';
 import { useResource } from '../hooks';
@@ -18,11 +18,15 @@ const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, authToken, field, multi
   const data: any = _.get(response, `data.attributes.${field}.data.attributes`, {});
 
   if (isLoading) {
-    return <Stack vertical>{multiple ? _.times(3).map((i) => <SkeletonMedia key={i} />) : <SkeletonMedia />}</Stack>;
+    return (
+      <LegacyStack vertical>
+        {multiple ? _.times(3).map((i) => <SkeletonMedia key={i} />) : <SkeletonMedia />}
+      </LegacyStack>
+    );
   }
 
   return (
-    <Stack vertical>
+    <LegacyStack vertical>
       {multiple ? (
         data.map(({ url, name, size, mime }: any, i: number) => (
           <Media key={i} url={url} name={name} size={size} mime={mime} />
@@ -30,7 +34,7 @@ const StrapiShowMedia: React.FC<Props> = ({ resourceUrl, authToken, field, multi
       ) : (
         <Media url={data.url} name={data.name} size={data.size} mime={data.mime} />
       )}
-    </Stack>
+    </LegacyStack>
   );
 };
 
