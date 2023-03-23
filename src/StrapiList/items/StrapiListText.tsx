@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { TextStyle, TextStyleProps } from '@shopify/polaris';
+import { TextStyleProps } from '@shopify/polaris';
 import _ from 'lodash';
 import ItemContext from './context';
 
@@ -7,12 +7,12 @@ type Props = TextStyleProps & {
   textField: string;
 };
 
-const StrapiListText: React.FC<Props> = ({ textField, ...rest }) => {
+const StrapiListText: React.FC<Props> = ({ textField }) => {
   const { item } = useContext(ItemContext);
 
   const text = _.get(item, textField, '');
 
-  return <TextStyle {...rest}>{text}</TextStyle>;
+  return <>{text}</>;
 };
 
 export default StrapiListText;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Filters, Select, Stack, TextField } from '@shopify/polaris';
+import { Button, Filters, Select, LegacyStack, TextField } from '@shopify/polaris';
 import _ from 'lodash';
 import context from './context';
 import { FilterOption, ListFilter } from './types';
@@ -52,7 +52,7 @@ const StrapiListFilter: React.FC<Props> = ({ search = false, options = [] }) => 
       label: 'Filters',
       filter: (
         <div style={{ minWidth: '12rem' }}>
-          <Stack vertical spacing="tight">
+          <LegacyStack vertical spacing="tight">
             <Select
               label="Field"
               labelHidden
@@ -102,7 +102,7 @@ const StrapiListFilter: React.FC<Props> = ({ search = false, options = [] }) => 
             >
               Add Filter
             </Button>
-          </Stack>
+          </LegacyStack>
         </div>
       ),
       shortcut: true,
