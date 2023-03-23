@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Heading, TextField } from '@shopify/polaris';
+import { Text, TextField } from '@shopify/polaris';
 import _ from 'lodash';
 import context from '../context';
 
@@ -20,7 +20,11 @@ const StrapiTextInput: React.FC<Props> = (attribute) => {
 
   return (
     <TextField
-      label={<Heading>{attribute.label}</Heading>}
+      label={
+        <Text variant="headingMd" as="h6">
+          {attribute.label}
+        </Text>
+      }
       type="text"
       inputMode="text"
       autoComplete={attribute.autoComplete || 'off'}

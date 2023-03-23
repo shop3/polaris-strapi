@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { Combobox, Heading, Listbox, Stack, Tag, TextStyle } from '@shopify/polaris';
+import { Combobox, Text, Listbox, LegacyStack, Tag } from '@shopify/polaris';
 import qs from 'qs';
 import _ from 'lodash';
 import context from '../context';
@@ -96,7 +96,11 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
 
   const searchMarkup = (
     <Combobox.TextField
-      label={<Heading>{relation.label}</Heading>}
+      label={
+        <Text variant="headingMd" as="h6">
+          {relation.label}
+        </Text>
+      }
       autoComplete="off"
       placeholder="Search"
       value={searchQuery}
@@ -135,12 +139,14 @@ const StrapiInputRelation: React.FC<Props> = (relation) => {
       </Combobox>
       {tagsMarkup.length > 0 && (
         <div style={{ marginTop: '0.8rem' }}>
-          <Stack spacing="tight">{tagsMarkup}</Stack>
+          <LegacyStack spacing="tight">{tagsMarkup}</LegacyStack>
         </div>
       )}
       {relation.description && (
         <div style={{ marginTop: '0.4rem' }}>
-          <TextStyle variation="subdued">{relation.description}</TextStyle>
+          <Text variant="headingMd" as="h6">
+            {relation.description}
+          </Text>
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { rest } from 'msw';
 import qs from 'qs';
-import { Card, FormLayout, Layout, Page } from '@shopify/polaris';
+import { LegacyCard, FormLayout, Layout, Page } from '@shopify/polaris';
 import _ from 'lodash';
 
 import {
@@ -36,7 +36,7 @@ const Template = ({ initialValue }: any) => (
     >
       <Layout>
         <Layout.Section>
-          <Card sectioned>
+          <LegacyCard sectioned>
             <FormLayout>
               <StrapiTextInput label="Title" field="title" minLength={3} maxLength={70} count />
               <StrapiTextInput label="Description" field="description" maxLength={150} lines={2} count />
@@ -54,10 +54,10 @@ const Template = ({ initialValue }: any) => (
               </FormLayout.Group>
               <StrapiMediaInput label="Images" field="images" mediaType="image" multiple={true} />
             </FormLayout>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
         <Layout.Section secondary>
-          <Card sectioned>
+          <LegacyCard sectioned>
             <FormLayout>
               <StrapiRelationInput
                 label="Category"
@@ -73,7 +73,7 @@ const Template = ({ initialValue }: any) => (
                 multiple
               />
             </FormLayout>
-          </Card>
+          </LegacyCard>
         </Layout.Section>
       </Layout>
     </StrapiEdit>

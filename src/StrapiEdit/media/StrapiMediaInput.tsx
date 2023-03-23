@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useCallback, useContext, useEffect, useState } from 'react';
-import { Button, DropZone, Heading, Spinner, Stack, TextStyle } from '@shopify/polaris';
+import { Button, DropZone, Text, Spinner, LegacyStack } from '@shopify/polaris';
 import { Media, MediaProps } from '@shop3/polaris-common';
 import _ from 'lodash';
 import Context from '../context';
@@ -145,7 +145,11 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
   return (
     <>
       <DropZone
-        label={<Heading>{attribute.label}</Heading>}
+        label={
+          <Text variant="headingMd" as="h6">
+            {attribute.label}
+          </Text>
+        }
         type={attribute.mediaType}
         accept={attribute.accept}
         allowMultiple={_.get(attribute, 'multiple', false)}
@@ -175,7 +179,7 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
         )}
         {files && files.length > 0 && (
           <div style={{ padding: '1.5rem' }}>
-            <Stack vertical>
+            <LegacyStack vertical>
               {files.map((file, index) => (
                 <div key={index} style={{ display: 'flex' }}>
                   <div style={{ flex: '1 1 0' }}>
@@ -188,11 +192,15 @@ const StrapiMediaInput: React.FC<Props> = (attribute) => {
                   </div>
                 </div>
               ))}
-            </Stack>
+            </LegacyStack>
           </div>
         )}
       </DropZone>
-      {attribute.description && <TextStyle variation="subdued">{attribute.description}</TextStyle>}
+      {attribute.description && (
+        <Text variant="headingMd" as="h6">
+          {attribute.description}
+        </Text>
+      )}
     </>
   );
 };
