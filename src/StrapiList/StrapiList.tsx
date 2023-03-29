@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Card, ResourceList } from '@shopify/polaris';
+import { LegacyCard, ResourceList } from '@shopify/polaris';
 import qs from 'qs';
 import _ from 'lodash';
 import { useResource } from '../hooks';
@@ -94,7 +94,7 @@ const StrapiList: React.FC<Props> = ({
   }, [response, isLoading]);
 
   return (
-    <Card>
+    <LegacyCard>
       <ResourceList
         loading={isLoading}
         items={isLoading ? _.times(3, () => ({})) : items}
@@ -126,7 +126,7 @@ const StrapiList: React.FC<Props> = ({
       <PaginationContext.Provider value={{ totalItems, pagination, setPagination }}>
         <StrapiListPagination />
       </PaginationContext.Provider>
-    </Card>
+    </LegacyCard>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { rest } from 'msw';
-import { Page, TextContainer } from '@shopify/polaris';
+import { Page, LegacyStack, Text } from '@shopify/polaris';
 import _ from 'lodash';
 
 import { StrapiList, StrapiListFilter, StrapiListItem, StrapiListText } from '../src';
@@ -43,13 +43,12 @@ const Template = ({ resource }: any) => (
       }
     >
       <StrapiListItem resourceUrl={`${process.env.PUBLIC_URL}/api/${resource}`} nameField="name" mediaField="image">
-        <TextContainer>
-          <h2>
-            <StrapiListText textField="name" variation="strong" />
-            <br />
-          </h2>
-          <StrapiListText textField="description" variation="subdued" />
-        </TextContainer>
+        <Text variant="bodyMd" fontWeight="bold" as="h3">
+          <StrapiListText textField="name" />
+        </Text>
+        <div>
+          <StrapiListText textField="description" />
+        </div>
       </StrapiListItem>
     </StrapiList>
   </Page>

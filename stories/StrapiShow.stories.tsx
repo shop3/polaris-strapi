@@ -1,6 +1,6 @@
 import React from 'react';
 import { rest } from 'msw';
-import { Card, Layout, TextContainer } from '@shopify/polaris';
+import { LegacyCard, Layout, LegacyStack } from '@shopify/polaris';
 import {
   StrapiShowPage,
   StrapiShowImage,
@@ -27,7 +27,7 @@ const Template = ({ id }: any) => (
         <StrapiShowImage resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="image" size="large" />
       </Layout.Section>
       <Layout.Section>
-        <Card sectioned>
+        <LegacyCard sectioned>
           <StrapiShowStats
             resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`}
             stats={[
@@ -36,16 +36,16 @@ const Template = ({ id }: any) => (
               { icon: 'FinancesMajor', label: 'Earnings', field: 'earnings' },
             ]}
           />
-        </Card>
-        <Card sectioned>
-          <TextContainer>
+        </LegacyCard>
+        <LegacyCard sectioned>
+          <LegacyStack vertical>
             <StrapiShowTitle resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="title" />
             <StrapiShowText resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="description" />
-          </TextContainer>
-        </Card>
-        <Card sectioned>
+          </LegacyStack>
+        </LegacyCard>
+        <LegacyCard sectioned>
           <StrapiShowJson resourceUrl={`${process.env.PUBLIC_URL}/api/test/${id}`} field="player" />
-        </Card>
+        </LegacyCard>
       </Layout.Section>
     </Layout>
   </StrapiShowPage>

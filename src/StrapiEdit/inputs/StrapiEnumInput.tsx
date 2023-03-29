@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Heading, Select } from '@shopify/polaris';
+import { Text, Select } from '@shopify/polaris';
 import _ from 'lodash';
 import context from '../context';
 
@@ -19,7 +19,11 @@ const StrapiEnumInput: React.FC<Props> = (attribute) => {
 
   return (
     <Select
-      label={<Heading>{attribute.label}</Heading>}
+      label={
+        <Text variant="headingMd" as="h6">
+          {attribute.label}
+        </Text>
+      }
       helpText={attribute.description}
       placeholder={attribute.placeholder || 'Select'}
       options={attribute.options}

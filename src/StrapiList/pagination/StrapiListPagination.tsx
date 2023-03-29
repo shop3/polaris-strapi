@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { Button, Pagination, Select, Stack, TextStyle } from '@shopify/polaris';
+import { Button, Pagination, Select, LegacyStack, Text } from '@shopify/polaris';
 import _ from 'lodash';
 import context from './context';
 
@@ -15,9 +15,9 @@ const StrapiListPagination: React.FC = () => {
 
   return (
     <div className="Polaris-ResourceList__FiltersWrapper">
-      <Stack alignment="center">
-        <Stack.Item fill>
-          <Stack alignment="center" spacing="tight">
+      <LegacyStack alignment="center">
+        <LegacyStack.Item fill>
+          <LegacyStack alignment="center" spacing="tight">
             <div style={{ width: '6rem' }}>
               <Select
                 label="Entries per page"
@@ -33,16 +33,18 @@ const StrapiListPagination: React.FC = () => {
                 }
               />
             </div>
-            <TextStyle variation="subdued">Entries per page</TextStyle>
-          </Stack>
-        </Stack.Item>
+            <Text variant="headingXs" as="h6">
+              Entries per page
+            </Text>
+          </LegacyStack>
+        </LegacyStack.Item>
         <Pagination
           hasPrevious={page !== 1}
           onPrevious={() => setPagination({ ...pagination, page: page - 1 })}
           hasNext={page !== pageCount}
           onNext={() => setPagination({ ...pagination, page: page + 1 })}
           label={
-            <Stack alignment="center" spacing="extraTight">
+            <LegacyStack alignment="center" spacing="extraTight">
               {_.times(pageLabelCount, (i) => (
                 <Button
                   key={i}
@@ -59,10 +61,10 @@ const StrapiListPagination: React.FC = () => {
                   {`${i + pageLabelIndex}`}
                 </Button>
               ))}
-            </Stack>
+            </LegacyStack>
           }
         />
-      </Stack>
+      </LegacyStack>
     </div>
   );
 };
